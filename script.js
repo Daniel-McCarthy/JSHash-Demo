@@ -9,10 +9,12 @@ function startTimer()
 function checkInput()
 {
 	var input = document.getElementById("hashInput").value;
+	var algorithm = document.getElementById("algorithmDropDownMenu").value;
 	
-	if(input != lastInput)
+	if((input != lastInput) || (algorithm != lastAlgorithm))
 	{
 		lastInput = input;
+		lastAlgorithm = algorithm;
 		hashInput();
 	}
 }
