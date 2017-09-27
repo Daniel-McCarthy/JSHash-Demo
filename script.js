@@ -1,4 +1,5 @@
 var lastInput = "";
+var lastAlgorithm = "";
 
 function startTimer()
 {
