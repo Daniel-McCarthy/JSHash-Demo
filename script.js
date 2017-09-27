@@ -25,107 +25,125 @@ function hashInput()
 	var algorithm = document.getElementById("algorithmDropDownMenu").value;
 	var input = document.getElementById("hashInput").value;
 
-	fetch('hash.wasm').then(response =>
-	  response.arrayBuffer()
-	).then(bytes =>
-	  WebAssembly.instantiate(bytes)
-	).then(results => {
-
-		var wasm = results.instance.exports;
-		let memory = new Uint32Array(wasm.memory.buffer);
+	if(!isWASMEnabled)
+	{
+		switch(algorithm)
+		{
+			case "FNV-0":
+			{
+			
+				break;
+			}
+			case "FNV-1":
+			{
+				break;
+			}
+			case "FNV-1A":
+			{
+				break;
+			}
+		}
+	}
+	else
+	{
 		
-		const readMemory = wasm.readMemory;
-		const writeMemory = wasm.writeMemory;
+		fetch('hash.wasm').then(response =>
+		  response.arrayBuffer()
+		).then(bytes =>
+		  WebAssembly.instantiate(bytes)
+		).then(results => {
+
+			var wasm = results.instance.exports;
+			let memory = new Uint32Array(wasm.memory.buffer);
+			
+			const readMemory = wasm.readMemory;
+			const writeMemory = wasm.writeMemory;
+			
+			if(algorithm == "FNV-0")
+			{
+				const fnv0 = wasm.fnv0;
+
+				for(var i = 0; i < input.length; i++)
+				{
+				  writeMemory(i, input.charCodeAt(i));
+				}
+				
+				var hash = fnv0(10);
+				var hashString = hash.toString(16);
+				
+				if (hashString.charAt(0) == '-')
+				{
+					hashString = hashString.substring(1);
+				}
+				
+				document.getElementById("hashOutput").value = hashString;
+			}
+			else if(algorithm == "FNV-1")
+			{
+				const fnv1 = wasm.fnv1;
+
+				var input = document.getElementById("hashInput").value;
+
+				for(var i = 0; i < input.length; i++)
+				{
+				  writeMemory(i, input.charCodeAt(i));
+				}
+				
+				var hash = fnv1(10);
+				var hashString = hash.toString(16);
+				
+				if (hashString.charAt (0) == '-')
+				{
+					hashString = hashString.substring(1);
+				}
+				
+				document.getElementById("hashOutput").value = hashString;
 		
-		if(algorithm == "FNV-0")
-		{
-			const fnv0 = wasm.fnv0;
-
-			var input = document.getElementById("hashInput").value;
-
-			for(var i = 0; i < input.length; i++)
-			{
-			  writeMemory(i, input.charCodeAt(i));
 			}
-			
-			var hash = fnv0(10);
-			var hashString = hash.toString(16);
-			
-			if (hashString.charAt(0) == '-')
+			else if(algorithm == "FNV-1A")
 			{
-				hashString = hashString.substring(1);
+				const fnv1a = wasm.fnv1a;
+
+				for(var i = 0; i < input.length; i++)
+				{
+				  writeMemory(i, input.charCodeAt(i));
+				}
+				
+				var hash = fnv1a(10);
+				var hashString = hash.toString(16);
+				
+				if (hashString.charAt (0) == '-')
+				{
+					hashString = hashString.substring(1);
+				}
+				
+				document.getElementById("hashOutput").value = hashString;
+		
 			}
-			
-			document.getElementById("hashOutput").value = hashString;
-		}
-		else if(algorithm == "FNV-1")
-		{
-			const fnv1 = wasm.fnv1;
-
-			var input = document.getElementById("hashInput").value;
-
-			for(var i = 0; i < input.length; i++)
+			else if(algorithm == "Adler-32")
 			{
-			  writeMemory(i, input.charCodeAt(i));
-			}
-			
-			var hash = fnv1(10);
-			var hashString = hash.toString(16);
-			
-			if (hashString.charAt (0) == '-')
-			{
-				hashString = hashString.substring(1);
-			}
-			
-			document.getElementById("hashOutput").value = hashString;
-	
-		}
-		else if(algorithm == "FNV-1A")
-		{
-			const fnv1a = wasm.fnv1a;
+				const adler32 = wasm.adler32;
 
-			var input = document.getElementById("hashInput").value;
-
-			for(var i = 0; i < input.length; i++)
-			{
-			  writeMemory(i, input.charCodeAt(i));
+				for(var i = 0; i < input.length; i++)
+				{
+				  writeMemory(i, input.charCodeAt(i));
+				}
+				
+				var hash = adler32(10);
+				var hashString = hash.toString(16);
+				
+				if (hashString.charAt (0) == '-')
+				{
+					hashString = hashString.substring(1);
+				}
+				
+				document.getElementById("hashOutput").value = hashString;
+		
 			}
-			
-			var hash = fnv1a(10);
-			var hashString = hash.toString(16);
-			
-			if (hashString.charAt (0) == '-')
-			{
-				hashString = hashString.substring(1);
-			}
-			
-			document.getElementById("hashOutput").value = hashString;
-	
-		}
-		else if(algorithm == "Adler-32")
-		{
-			const adler32 = wasm.adler32;
 
-			var input = document.getElementById("hashInput").value;
 
-			for(var i = 0; i < input.length; i++)
-			{
-			  writeMemory(i, input.charCodeAt(i));
-			}
-			
-			var hash = adler32(10);
-			var hashString = hash.toString(16);
-			
-			if (hashString.charAt (0) == '-')
-			{
-				hashString = hashString.substring(1);
-			}
-			
-			document.getElementById("hashOutput").value = hashString;
-	
-		}
-
-	});
+		});
+	}
 }
 
 function swapLanguage()
