@@ -22,4 +22,19 @@ int fnv0(int messageLength)
   }
   
   return hash;
+}}
+
+int fnv1(int messageLength)
+{
+	
+  int hash = 0x811C9DC5;
+  
+  for(int i = 0; i < messageLength; i++)
+  {
+    hash *= 16777619;
+    hash ^= readMemory(i);
+  }
+  
+  return hash;
 }
+
