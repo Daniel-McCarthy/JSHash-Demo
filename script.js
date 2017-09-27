@@ -1,5 +1,6 @@
 var lastInput = "";
 var lastAlgorithm = "";
+var isWASMEnabled = true;
 
 function startTimer()
 {
