@@ -127,3 +127,8 @@ function hashInput()
 
 	});
 }
+
+function swapLanguage()
+{
+	isWASMEnabled = !isWASMEnabled;
+}
