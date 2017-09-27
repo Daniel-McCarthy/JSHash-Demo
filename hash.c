@@ -51,3 +51,22 @@ int fnv1a(int messageLength)
   
   return hash;
 }
+
+int adler32(int messageLength)
+{
+	int a = 1;
+	int b = 0;
+	int c = 0;
+	
+	for(int i = 0; i < messageLength; i++)
+	{
+		c = a;
+		a = (a + readMemory(i)) % 65521;
+		b = (b + readMemory(i) + c) % 65521;
+	}
+	
+	int fullHash = (b * 0x10000 + a);
+
+	return fullHash;
+}
+
