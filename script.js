@@ -101,6 +101,28 @@ function hashInput()
 			document.getElementById("hashOutput").value = hashString;
 	
 		}
+		else if(algorithm == "Adler-32")
+		{
+			const adler32 = wasm.adler32;
+
+			var input = document.getElementById("hashInput").value;
+
+			for(var i = 0; i < input.length; i++)
+			{
+			  writeMemory(i, input.charCodeAt(i));
+			}
+			
+			var hash = adler32(10);
+			var hashString = hash.toString(16);
+			
+			if (hashString.charAt (0) == '-')
+			{
+				hashString = hashString.substring(1);
+			}
+			
+			document.getElementById("hashOutput").value = hashString;
+	
+		}
 
 	});
 }
