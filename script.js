@@ -47,8 +47,15 @@ function hashInput()
 			  writeMemory(i, input.charCodeAt(i));
 			}
 			
-			var hash = fnv0(10).toString(16);
-			document.getElementById("hashOutput").value = hash;
+			var hash = fnv0(10);
+			var hashString = hash.toString(16);
+			
+			if (hashString.charAt(0) == '-')
+			{
+				hashString = hashString.substring(1);
+			}
+			
+			document.getElementById("hashOutput").value = hashString;
 		}
 		else if(algorithm == "FNV-1")
 		{
