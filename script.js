@@ -48,6 +48,15 @@ function hashInput()
 			}
 			case "FNV-1":
 			{
+				var hash = fnv1(input);
+				var hashString = hash.toString(16);
+				
+				if (hashString.charAt (0) == '-')
+				{
+					hashString = hashString.substring(1);
+				}
+				
+				document.getElementById("hashOutput").value = hashString;
 				break;
 			}
 			case "FNV-1A":
