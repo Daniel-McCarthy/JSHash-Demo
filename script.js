@@ -12,11 +12,13 @@ function checkInput()
 {
 	var input = document.getElementById("hashInput").value;
 	var algorithm = document.getElementById("algorithmDropDownMenu").value;
+	var language = isWASMEnabled;
 	
-	if((input != lastInput) || (algorithm != lastAlgorithm))
+	if((input != lastInput) || (algorithm != lastAlgorithm) || (language != lastLanguage))
 	{
 		lastInput = input;
 		lastAlgorithm = algorithm;
+		lastLanguage = language;
 		hashInput();
 	}
 }
