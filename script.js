@@ -23,10 +23,11 @@ function checkInput()
 function hashInput()
 {
 	var algorithm = document.getElementById("algorithmDropDownMenu").value;
-	var input = document.getElementById("hashInput").value;
 
 	if(!isWASMEnabled)
 	{
+		var input = document.getElementById("hashInput").value;
+		
 		switch(algorithm)
 		{
 			case "FNV-0":
@@ -54,6 +55,7 @@ function hashInput()
 		).then(results => {
 
 			var wasm = results.instance.exports;
+			var input = document.getElementById("hashInput").value;
 			let memory = new Uint32Array(wasm.memory.buffer);
 			
 			const readMemory = wasm.readMemory;
@@ -81,8 +83,6 @@ function hashInput()
 			else if(algorithm == "FNV-1")
 			{
 				const fnv1 = wasm.fnv1;
-
-				var input = document.getElementById("hashInput").value;
 
 				for(var i = 0; i < input.length; i++)
 				{
