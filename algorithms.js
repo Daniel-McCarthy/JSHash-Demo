@@ -37,3 +37,21 @@ function fnv1a(message)
 	
 	return hash >>> 0;
 }
+
+function adler32(message)
+{
+	var a = 1;
+	var b = 0;
+	var c = 0;
+	
+	for(var i = 0; i < messageLength; i++)
+	{
+		c = a;
+		a = (a + readMemory(i)) % 65521;
+		b = (b + readMemory(i) + c) % 65521;
+	}
+	
+	var fullHash = (Math.imul(b, 0x10000) + a);
+
+	return fullHash >>> 0;
+}
