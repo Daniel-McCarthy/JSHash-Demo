@@ -9,7 +9,7 @@ function fnv0(message)
 		hash =  (hash ^ message.charCodeAt(i));
 	}
 	
-	return hash | 0;
+	return hash >>> 0;
 }
 
 function fnv1(message)
@@ -22,7 +22,7 @@ function fnv1(message)
 		hash =  (hash ^ message.charCodeAt(i));
 	}
 	
-	return hash | 0;
+	return hash >>> 0;
 }
 
 function fnv1a(message)
@@ -35,5 +35,5 @@ function fnv1a(message)
 		hash = Math.imul(hash, 16777619);
 	}
 	
-	return hash | 0;
+	return hash >>> 0;
 }
