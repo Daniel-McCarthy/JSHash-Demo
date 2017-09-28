@@ -99,7 +99,7 @@ function hashInput()
 				  writeMemory(i, input.charCodeAt(i));
 				}
 				
-				var hash = fnv0(10);
+				var hash = fnv0(10) >>> 0;
 				var hashString = hash.toString(16);
 				
 				if (hashString.charAt(0) == '-')
@@ -118,7 +118,7 @@ function hashInput()
 				  writeMemory(i, input.charCodeAt(i));
 				}
 				
-				var hash = fnv1(10);
+				var hash = fnv1(10) >>> 0;
 				var hashString = hash.toString(16);
 				
 				if (hashString.charAt (0) == '-')
@@ -138,7 +138,7 @@ function hashInput()
 				  writeMemory(i, input.charCodeAt(i));
 				}
 				
-				var hash = fnv1a(10);
+				var hash = fnv1a(10) >>> 0;
 				var hashString = hash.toString(16);
 				
 				if (hashString.charAt (0) == '-')
@@ -158,7 +158,7 @@ function hashInput()
 				  writeMemory(i, input.charCodeAt(i));
 				}
 				
-				var hash = adler32(10);
+				var hash = adler32(10) >>> 0;
 				var hashString = hash.toString(16);
 				
 				if (hashString.charAt (0) == '-')
