@@ -31,6 +31,7 @@
 					<option value="FNV-1">FNV-1</option>
 					<option value="FNV-1A">FNV-1A</option>
 					<option value="Adler-32">Adler-32</option>
+					<!--<option value="CRC-32B">CRC-32B</option>-->
 				</select>
 			</div>
 			
@@ -41,6 +42,11 @@
 			
 			</div>
 			
+			<!-- Language Selection Radio Buttons -->
+			<div style = "position:relative; top: 30px;">
+				<input type = "radio" name = "languageSelect" onchange = "swapLanguage()" checked>Web Assembly
+				<input type = "radio" name = "languageSelect" onchange = "swapLanguage()"> Javascript<br>
+			</div>
 			
 		</div>
 		
