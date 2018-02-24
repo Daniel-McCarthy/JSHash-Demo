@@ -44,11 +44,11 @@ function adler32(message)
 	var b = 0;
 	var c = 0;
 	
-	for(var i = 0; i < messageLength; i++)
+	for(var i = 0; i < message.length; i++)
 	{
 		c = a;
-		a = (a + readMemory(i)) % 65521;
-		b = (b + readMemory(i) + c) % 65521;
+		a = (a + message.charCodeAt(i)) % 65521;
+		b = (b + message.charCodeAt(i) + c) % 65521;
 	}
 	
 	var fullHash = (Math.imul(b, 0x10000) + a);
