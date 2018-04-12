@@ -83,6 +83,22 @@ function adler32(message)
 	return (~hash >>> 0);
   };
 
+  function joaat32_Hash (message) {
+	  var hash = 0;
+	  
+	  for (var i = 0; i < message.length; i++)
+	  {
+		  hash += (message.charCodeAt(i) | 0);
+		  hash += (hash << 10);
+		  hash ^= (hash >>> 6);
+	  }
+	  
+	  hash += (hash << 3);
+	  hash ^= (hash >>> 11);
+	  hash += (hash << 15);
+	  
+	  return ((hash & 0xFFFFFFFF) >>> 0);
+  }
 
 
   function reverseEndian (hash) {
