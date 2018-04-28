@@ -4,6 +4,7 @@ alert(fnv0(input).toString(16));
 alert(fnv1(input).toString(16));
 alert(fnv1a(input).toString(16));
 alert(adler32(input).toString(16));
+alert(joaat32_Hash(input).toString(16));
 
 function fnv0(input: string): number
 {
@@ -46,6 +47,7 @@ function fnv1a(input: string): number
 
     return (hash >>> 0);
 }
+
 function adler32(message: string): number
 {
 	let a: number = 1;
@@ -63,4 +65,22 @@ function adler32(message: string): number
 	var fullHash = (Math.imul(b, 0x10000) + a);
 
 	return fullHash >>> 0;
+}
+
+function joaat32_Hash (message) {
+	let hash: number = 0;
+
+	let i: number;
+	for (i = 0; i < message.length; i++)
+	{
+	  hash += (message.charCodeAt(i) | 0);
+	  hash += (hash << 10);
+	  hash ^= (hash >>> 6);
+	}
+
+	hash += (hash << 3);
+	hash ^= (hash >>> 11);
+	hash += (hash << 15);
+
+	return ((hash & 0xFFFFFFFF) >>> 0);
 }
