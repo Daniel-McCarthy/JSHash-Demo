@@ -84,3 +84,6 @@ function joaat32_Hash (message) {
 
 	return ((hash & 0xFFFFFFFF) >>> 0);
 }
+function reverseEndian (hash) {
+	return ((((((hash >>> 0) & 0x000000FF) << 24) | (((hash >>> 0) & 0xFF000000) >>> 24)) | (((hash >>> 0) & 0x00FF0000) >>> 8)) | (((hash >>> 0) & 0x0000FF00) << 8));
+}
