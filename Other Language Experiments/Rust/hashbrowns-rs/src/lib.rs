@@ -1,5 +1,7 @@
 pub mod fnv;
 pub mod adler;
+pub mod reverse_endian;
+
 #[cfg(test)]
 mod tests {
     use super::*;
