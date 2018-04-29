@@ -1,6 +1,7 @@
 pub mod fnv;
 pub mod adler;
 pub mod crc;
+pub mod joaat;
 pub mod reverse_endian;
 
 #[cfg(test)]
@@ -37,5 +38,9 @@ mod tests {
         assert_eq!( format!( "{:x}", crc::crc_b_32("HelloKitty") ), "129ca114");
     }
 	
+	#[test]
+    fn joaat_test() {
+        assert_eq!( format!( "{:x}", joaat::joaat("HelloKitty") ), "ad10d980");
+    }
 
 }
