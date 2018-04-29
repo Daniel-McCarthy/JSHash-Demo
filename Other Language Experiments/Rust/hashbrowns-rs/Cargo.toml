@@ -1,0 +1,6 @@
+[package]
+name = "hashbrowns"
+version = "0.1.0"
+authors = ["Dan McCarthy <dan.willy.mccarthy@gmail.com>"]
+
+[dependencies]
