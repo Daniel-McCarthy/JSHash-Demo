@@ -1,4 +1,5 @@
 pub mod fnv;
+pub mod adler;
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -17,5 +18,11 @@ mod tests {
     fn fnv1a_test() {
         assert_eq!( format!( "{:x}", fnv::fnv1a("HelloKitty") ), "2c934346");
     }
+	
+	#[test]
+    fn adler32_test() {
+        assert_eq!( format!( "{:x}", adler::adler32("HelloKitty") ), "152d040a");
+    }
+	
 
 }
